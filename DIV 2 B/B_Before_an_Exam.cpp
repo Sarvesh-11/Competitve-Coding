@@ -26,45 +26,36 @@ map<int,int> m;
 int main(){
 	io;
     ll n,k;cin>>n>>k;
-    ll ma=0,mn=0;
     vector<pairi> v;
-    for(int i=0;i<n;i++){
+    ll mn=0,mx=0;
+    sidha(i,0,n){
         int a,b;cin>>a>>b;
-        v.push_back({a,b});
-        ma+=a;mn+=b;
+        v.pb({a,b});
+        mn+=a;mx+=b;
     }
-    // cout<<ma<<" "<<mn<<endl;
-    int j=0;
-    if(k<ma and k>mn){
+    //cout<<mn<<" "<<mx<<endl;
+    if(k<mn or k>mx){
         cout<<"NO"<<endl;
     }
-    else if(k==ma){
-        cout<<"YES"<<endl;
+    else{
+        k-=mn;
+        //cout<<k<<" ";
+        for(int i=0;i<n;i++){
+            if(k>=(v[i].second-v[i].first)){
+                k-=(v[i].second-v[i].first);
+                v[i].first=v[i].second;
+            }
+            else{
+                v[i].first+=k;k=0;
+                break;
+            }
+            //cout<<k<<" ";
+        }
+        //cout<<mn<<" "<<mx<<endl;
+         cout<<"YES"<<endl;
+        //cout<<k<<endl;
         for(int i=0;i<n;i++){
             cout<<v[i].first<<" ";
-        }
-    }
-    else if(k==mn){
-        cout<<"YES"<<endl;
-        for(int i=0;i<n;i++){
-            cout<<v[i].second<<" ";
-        }
-    }
-    else{
-        cout<<"YES"<<endl;
-        while(ma>=k){
-            ma+=(v[j].second-v[j].first);v[j].first=v[j].second;j++;
-        }
-        if(ma==k){
-            for(int i=0;i<n;i++){
-                cout<<v[i].first<<" ";
-            }
-        }
-        else{
-            v[j-1].first-=(ma-k);
-            for(int i=0;i<n;i++){
-                cout<<v[i].first<<" ";
-            }
         }
     }
 	return 0;
