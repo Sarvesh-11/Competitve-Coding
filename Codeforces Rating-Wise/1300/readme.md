@@ -1,1 +1,1 @@
-#Codeforces Question of 1300 Rating
+Codeforces Question of 1300 Rating
